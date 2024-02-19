@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: healthcheck-cronjob
+  namespace: healthcheck
+spec:
+  schedule: "0 0 * * *"  # Replace with your desired schedule
+  concurrencyPolicy: Forbid  # Use "Allow" if parallel executions are allowed
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: healthcheck
+            image: rcpatel/healthcheck:latest  # Or your preferred image
+            envFrom:
+            - configMapRef:
+                name: healthcheck-cm
+          restartPolicy: OnFailure

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-cm
+  labels:
+  {{- .Release.Name.labels | nindent 4 }}
+data:
+  SENDER_EMAIL: {{ .Values.cm.senderEmail | quote }}
+  SENDER_PASSWORD: {{ .Values.cm.senderPassword | quote }}
+  SMTP_PORT: {{ .Values.cm.smtpPort | quote }}
+  SMTP_SERVER: {{ .Values.cm.smtpServer | quote }}
+  cluster_name: {{ .Values.clusterName | quote }}
+  minimum_eks_version: {{ .Values.cm.minimumEksVersion | quote }}
+  recipients: {{ .Values.cm.recipients | quote }}

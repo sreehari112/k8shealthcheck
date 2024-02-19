@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: healthcheck-cm
+  namespace: healthcheck
+data:
+  cluster_name: "testing"
+  recipients: ""
+  SENDER_EMAIL: ""
+  SENDER_PASSWORD: ""
+  SMTP_SERVER: ""
+  SMTP_PORT: ""
+  minimum_eks_version: "1.29"

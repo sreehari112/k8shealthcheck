@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthcheck
+  labels:
+    app: healthcheck
+spec:
+  containers:
+  - name: healthcheck
+    image: rcpatel/healthcheck:latest
+    envFrom:
+      - configMapRef:
+          name: healthcheck-cm

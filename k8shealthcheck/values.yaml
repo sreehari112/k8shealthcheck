@@ -1,0 +1,17 @@
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+type: #deployment or cronjob
+clusterName: testing
+cm:
+  minimumEksVersion: "1.29"
+  recipients: ""
+  senderEmail: ""
+  senderPassword: ""
+  smtpPort: ""
+  smtpServer: ""
+sa:
+  serviceAccount:
+    annotations: {}

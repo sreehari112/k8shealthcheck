@@ -1,0 +1,23 @@
+{{- if eq .Values.type "cronjob" }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-cronjob
+  labels:
+  {{- .Release.Name.labels | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-cm
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            name: {{ .Chart.Name }}
+          restartPolicy: OnFailure
+  schedule: "{{ .Values.schedule }}"
+{{- end }}
